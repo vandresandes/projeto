@@ -31,7 +31,7 @@ export class CodigoValidacaoComponent implements OnInit {
 	constructor(private dataPgeService: DataPgeService) {}
 
 	ngOnInit() {
-		$('[tabindex=' + 1 + ']').focus();
+		this.focus();
 	}
 
 	tabCodigoValidacao(event: KeyboardEvent) {
@@ -79,7 +79,7 @@ export class CodigoValidacaoComponent implements OnInit {
 				this.idCurrent = this.getData.hasOwnProperty("entries") ? this.getData['entries']['0']['title'] : null,
 				this.pesquisarPdf(this.idCurrent)
 			},
-			error => alert(error), () => console.log("acesso a webapi get ok... pesquisarPdf")
+			error => alert(error), () => console.log("pesquisarPorCodigoValidacao: acesso a webapi get ok.")
 		 );
 	}
 
@@ -99,30 +99,30 @@ export class CodigoValidacaoComponent implements OnInit {
 				this.pdf = this.getLinkContentMedia(links),
 				this.hidePdf = false
 			},
-			error => alert(error), () => console.log("acesso a webapi get ok... pesquisarPorCodigoValidacao")
+			error => alert(error), () => console.log("pesquisarPdf: acesso a webapi get ok.")
 		 );
 	}
 
-	concatenarCodigoValidacao() {
-		let codigoValidacao: string = "";
+	concatenarCodigoValidacao(): string {
+		let codigo: string = "";
 
 		for (var i = 1; i < 5; i++) {
 			let element = (<HTMLInputElement>document.getElementById("codigoValidacao"+i));
 			let valor = element.value;
 			if (valor !== null) {
-				codigoValidacao += valor;
+				codigo += valor;
 			} else {
 				break;
 			}
 		}
-		return codigoValidacao;
+		return codigo;
 	}
 
-	criarDqlBuscarUltimoDocumentoPorId(rObjectId) {
+	criarDqlBuscarUltimoDocumentoPorId(rObjectId): string {
 		return `select d.r_object_id from dm_document d where d.object_name=(select d2.object_name from dm_sysobject d2 where d2.r_object_id='${rObjectId}')`;
 	}
 
-	criarUrlContentsContent(r_object_id) {
+	criarUrlContentsContent(r_object_id): string {
 		let objects: string = "/dctm-rest/repositories/PGE_DEV1/objects/";
 		let contentsContent: string = "/contents/content/";
 		return objects.concat(r_object_id).concat(contentsContent);
@@ -146,20 +146,25 @@ export class CodigoValidacaoComponent implements OnInit {
 		$('[tabindex=' + nextTabIndex + ']').focus();
 	}
 
-	resetVariaveis() {
+	resetVariaveis(): void {
 		this.pdf = "";
 		this.hidePdf = true;
 		this.idCurrent = null;
 		this.hideMsgNaoEncontrad = true;
 	}
 
-	limpar(form) {
+	limpar(form): void {
 		form.reset();
-		this.resetVariaveis();		
+		this.resetVariaveis();	
+		this.focus();	
 	}
 
 	getLengthCodigoValidacao(): number {
 		return this.codigoValidacao != null ? this.codigoValidacao.length : 0;
+	}
+
+	focus(): void {
+		$('[tabindex=' + 1 + ']').focus();
 	}
 
 }

@@ -12,14 +12,16 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
  ): Observable<HttpEvent<any>> {
   
   const authReq = req.clone({
-    headers: req.headers.set('Authorization', this.getAuthorization())
+    headers: req.headers.set('authorization', this.getAuthorization())
   });
+
   return next.handle(authReq);
   }
   
-  getAuthorization() {
-	return "Basic " + window.btoa("ecm:Cd0pPg3");
+  getAuthorization(): string {
+  	return `Basic ${window.btoa('ecm:Cd0pPg3')}`;
   }
+
 }
 
 
