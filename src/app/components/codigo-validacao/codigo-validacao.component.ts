@@ -51,7 +51,6 @@ export class CodigoValidacaoComponent implements OnInit {
 
 		this.codigoValidacao = this.concatenarCodigoValidacao();
 		if (this.codigoValidacao.length == 16) {
-			console.log("codigoValidacao.length igual a 16");
 			this.captchaElem.execute();
 		}
 	}
