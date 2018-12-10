@@ -4,15 +4,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, SafePipe } from './app.component';
-import { NavComponent } from './nav/nav.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
-import { HomeComponent } from './home/home.component';
+import { NavComponent } from './components/nav/nav.component';
+import { AboutComponent } from './components/about/about.component';
 import { Interceptor } from './auth/interceptor.module';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CodigoValidacaoComponent } from './codigo-validacao/codigo-validacao.component';
-import { CaptchaComponent } from './captcha/captcha.component';
+import { CodigoValidacaoComponent } from './components/codigo-validacao/codigo-validacao.component';
+import { CaptchaComponent } from './components/captcha/captcha.component';
 import { AccordionModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
@@ -20,8 +18,8 @@ import { RadioButtonModule } from 'primeng/primeng';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { HttpModule } from '@angular/http';
-import { RecaptchaComponent } from './recaptcha/recaptcha.component';
-import { FooterComponent } from './footer/footer.component';
+import { RecaptchaComponent } from './components/recaptcha/recaptcha.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
@@ -32,8 +30,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     SafePipe,
     NavComponent,
     AboutComponent,
-    ContactComponent,
-    HomeComponent,
     CodigoValidacaoComponent,
     CaptchaComponent,
     RecaptchaComponent,

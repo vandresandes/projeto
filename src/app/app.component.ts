@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, ViewChild, ElementRef, PipeTransform, Pipe, OnInit } from '@angular/core';
 import { DomSanitizer } from "@angular/platform-browser";
 import { environment } from '../../src/environments/environment';
+import * as $ from "jquery";
 
 
 @Pipe({ name: 'safe' })
