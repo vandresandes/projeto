@@ -6,7 +6,6 @@ import { routing }        from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { AboutComponent } from './components/about/about.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CodigoValidacaoComponent, SafePipe } from './components/codigo-validacao/codigo-validacao.component';
 import { CaptchaComponent } from './components/captcha/captcha.component';
@@ -21,6 +20,9 @@ import { HomeComponent } from './home/home.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { RegisterComponent } from './register/register.component';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
+
+import {ButtonModule} from 'primeng/button';
+import {InputTextModule} from 'primeng/inputtext';
 
 
 @NgModule({
@@ -43,11 +45,12 @@ import { JwtInterceptor, ErrorInterceptor } from './helpers';
     routing,
     HttpClientModule,
     HttpModule,
-	  PdfViewerModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     NgxCaptchaModule,
+    ButtonModule,
+    InputTextModule,
     TooltipModule.forRoot()
   ],
   providers: [
