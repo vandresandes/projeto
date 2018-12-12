@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  private title: string = 'Validação de Documento';
-  private logo: string = "assets/img/logo.png";
+  @Input() title: string;
+  logo: string = "assets/img/logo.png";
 
   constructor() { }
 

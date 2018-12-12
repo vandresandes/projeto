@@ -1,16 +1,11 @@
 import { Component, ViewEncapsulation, ViewChild, ElementRef, PipeTransform, Pipe, OnInit } from '@angular/core';
 import { DomSanitizer } from "@angular/platform-browser";
-import { environment } from '../../src/environments/environment';
 import * as $ from "jquery";
+import { User } from './models/user';
+import { Router } from '@angular/router';
+import { AuthenticationService } from './service/authentication.service';
 
 
-@Pipe({ name: 'safe' })
-export class SafePipe implements PipeTransform {
-  constructor(private sanitizer: DomSanitizer) { }
-  transform(url) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-  }
-}
 
 @Component({
   selector: 'app-root',
@@ -18,10 +13,16 @@ export class SafePipe implements PipeTransform {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  ambiente: string;
-  title = 'projeto';
+  title: string = 'Validação de Documento';
+  logo: string = "assets/img/logo.png";
+  currentUser: User;
 
-  constructor() {
-    this.ambiente = environment.ambiente;
+  constructor(private router: Router, private authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -24,17 +24,4 @@ export class DataRecaptchaService {
     return invisible ? this.secretKeyInvisible : this.secretKey;
   }
 
-  getRequestOptions() {
-    let opts:RequestOptionsArgs = {headers: this.getHeaders()};
-    return opts;
-  }
-
-  getHeaders() {
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Access-Control-Allow-Credentials", "true");
-    headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Cache-Control", "no-cache"); // due to IE browser caches API get requests
-    return headers;
-  }
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '@environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,11 @@ export class CodigoValidacaoService {
   constructor(private httpClient: HttpClient) { }
 
   get(url: string) {
-    return this.httpClient.get(url).map(res=> res);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic ZWNtOkNkMHBQZzM='
+      })
+    };
+    return this.httpClient.get(url, httpOptions).map(res=> res);
   }
 }

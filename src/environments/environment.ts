@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'assets/usuario.json',
   ambiente: "desenvolvimento"
 };
 

@@ -1,7 +1,16 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { RelationsDocumentum } from './../../enums/RelationsDocumentum';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Pipe, PipeTransform } from '@angular/core';
 import { CodigoValidacaoService } from 'src/app/service/codigo-validacao.service';
 import { RecaptchaComponent } from '../recaptcha/recaptcha.component';
+
+@Pipe({ name: 'safe' })
+export class SafePipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) { }
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+}
 
 @Component({
   selector: 'app-codigo-validacao',
@@ -31,7 +40,7 @@ export class CodigoValidacaoComponent implements OnInit {
 	constructor(private codigoValidacaoService: CodigoValidacaoService) {}
 
 	ngOnInit() {
-		this.focus();
+    this.focus();
 	}
 
 	tabCodigoValidacao(event: KeyboardEvent) {
