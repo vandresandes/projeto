@@ -1,2 +1,2 @@
 # projeto
-Projeto de desenvolvimento
+Projeto em desenvolvimento

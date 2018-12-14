@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  home: string = "/codigo-validacao";
 
     constructor(
         private formBuilder: FormBuilder,
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
     ) {
         // redirecionar para home se já estiver logado
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
+            this.router.navigate([this.home]);
         }
     }
 
@@ -37,8 +38,8 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
 
-        // obter url de retorno dos parâmetros de rota ou padrão para '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        // obter url de retorno dos parâmetros de rota ou padrão para home
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || this.home;
     }
 
     // conveniência getter para facilitar o acesso aos campos de formulário

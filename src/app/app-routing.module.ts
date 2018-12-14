@@ -1,17 +1,30 @@
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { RegisterComponent } from './register';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './guards';
+import { HomeComponent } from './home';
+import { CodigoValidacaoComponent } from './components/codigo-validacao';
 
-const appRoutes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'codigo-validacao', component: CodigoValidacaoComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
 
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+  // { path: '',
+  //   redirectTo: '/login',
+  //   pathMatch: 'full'
+  // },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
-export const routing = RouterModule.forRoot(appRoutes);
+@NgModule({
+  imports: [
+    RouterModule.forRoot(
+      routes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

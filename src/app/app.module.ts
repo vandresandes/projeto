@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { routing }        from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { AboutComponent } from './components/about/about.component';
@@ -18,11 +18,11 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AlertComponent } from './components/alert/alert.component';
-import { RegisterComponent } from './register/register.component';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
 
-import {ButtonModule} from 'primeng/button';
-import {InputTextModule} from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +37,11 @@ import {InputTextModule} from 'primeng/inputtext';
     LoginComponent,
     HomeComponent,
     AlertComponent,
-    RegisterComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
-    routing,
+    AppRoutingModule,
     HttpClientModule,
     HttpModule,
     BrowserAnimationsModule,
