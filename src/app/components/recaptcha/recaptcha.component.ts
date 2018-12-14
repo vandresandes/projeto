@@ -26,31 +26,25 @@ export class RecaptchaComponent implements OnInit {
   }
 
   handleSuccess(event) {
-    console.log("handleSuccess...");
     this.post(event);
   }
 
   handleReset() {
-    console.log("handleReset...");
   }
 
   handleReady() {
-    console.log("handleReady...");
   }
 
   handleExpire() {
-    console.log("handleExpire...");
   }
 
   /**
    * Opcional. O nome da sua função de retorno de chamada a ser executada assim que todas as dependências forem carregadas.
    */
   handleLoad() {
-    console.log("handleLoad...");
   }
 
   handleReload() {
-    console.log("handleReload...");
   }
 
   /**

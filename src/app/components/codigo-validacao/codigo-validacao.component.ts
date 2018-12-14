@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild, Pipe, PipeTransform } from '@angular/core
 import { CodigoValidacaoService } from 'src/app/service/codigo-validacao.service';
 import { RecaptchaComponent } from '../recaptcha/recaptcha.component';
 
+
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) { }
@@ -19,21 +20,21 @@ export class SafePipe implements PipeTransform {
 })
 export class CodigoValidacaoComponent implements OnInit {
 
-  protected title: string = "Validar Documento";
-	protected lbCodigoValidacao: string = "Código de validação:";
-	protected getData;
-	protected idCurrent: string;
-	protected pdf: string = "";
-	protected hidePdf: boolean = true;
-	protected hideMsgNaoEncontrad: boolean = true;
-	protected urlDql: string = "/dctm-rest/repositories/PGE_DEV1?dql=";
-	protected msgNaoEncontrado: string = "Não encontrado!";
-	protected codigoValidacao1: string = null;
-	protected codigoValidacao2: string = null;
-	protected codigoValidacao3: string = null;
-	protected codigoValidacao4: string = null;
-	protected lbLimpar: string = "Limpar";
-	protected codigoValidacao: string;
+  title: string = "Validar Documento";
+	lbCodigoValidacao: string = "Código de validação:";
+	getData;
+	idCurrent: string;
+	pdf: string = "";
+	hidePdf: boolean = true;
+	hideMsgNaoEncontrad: boolean = true;
+	urlDql: string = "/dctm-rest/repositories/PGE_DEV1?dql=";
+	msgNaoEncontrado: string = "Não encontrado!";
+	codigoValidacao1: string = null;
+	codigoValidacao2: string = null;
+	codigoValidacao3: string = null;
+	codigoValidacao4: string = null;
+	lbLimpar: string = "Limpar";
+  codigoValidacao: string;
 
   @ViewChild('captchaElem') captchaElem: RecaptchaComponent;
 
@@ -72,22 +73,20 @@ export class CodigoValidacaoComponent implements OnInit {
 	}
 
 	pesquisarPorCodigoValidacao() {
-		let idCurrent: string;
-
-		if (this.codigoValidacao == null || this.codigoValidacao == '' || this.codigoValidacao.length != 16) {
+		if (this.codigoValidacao === null || this.codigoValidacao === '' || this.codigoValidacao.length !== 16) {
 			return;
 		}
 
 		let dql = this.criarDqlBuscarUltimoDocumentoPorId(this.codigoValidacao);
-		let url = this.urlDql.concat(dql);
+		let url = `${this.urlDql}${dql}`;
 
 		this.codigoValidacaoService.get(url).subscribe(
 			data => {
-				this.getData =  data,
-				this.idCurrent = this.getData.hasOwnProperty("entries") ? this.getData['entries']['0']['title'] : null,
+        this.getData =  data,
+        this.idCurrent = this.getData.hasOwnProperty('entries') ? this.getData['entries']['0']['title'] : null,
 				this.pesquisarPdf(this.idCurrent)
 			},
-			error => alert(error), () => console.log("pesquisarPorCodigoValidacao: acesso a webapi get ok.")
+			error => alert(error), () => console.log('pesquisarPorCodigoValidacao: acesso a webapi get ok.')
 		 );
 	}
 
@@ -103,13 +102,13 @@ export class CodigoValidacaoComponent implements OnInit {
 		this.codigoValidacaoService.get(url).subscribe(
 			data => {
 				this.getData =  data,
-				links = this.getData['links'],
-				this.pdf = this.getLinkContentMedia(links),
-				this.hidePdf = false
+        links = this.getData['links'],
+        this.pdf = this.getLinkContentMedia(links),
+        this.hidePdf = false
 			},
 			error => alert(error), () => console.log("pesquisarPdf: acesso a webapi get ok.")
 		 );
-	}
+  }
 
 	concatenarCodigoValidacao(): string {
 		let codigo: string = "";
@@ -131,15 +130,14 @@ export class CodigoValidacaoComponent implements OnInit {
 	}
 
 	criarUrlContentsContent(r_object_id): string {
-		let objects: string = "/dctm-rest/repositories/PGE_DEV1/objects/";
-		let contentsContent: string = "/contents/content/";
-		return objects.concat(r_object_id).concat(contentsContent);
+		return `/dctm-rest/repositories/PGE_DEV1/objects/${r_object_id}/contents/content/`;
 	}
 
 	getLinkContentMedia(links) {
 		for (var i = 0; i < links.length; i++) {
 			var link = links[i];
 			if (link.rel == RelationsDocumentum.CONTENT_MEDIA) {
+        document.getElementById('documentoObject')['data']=link.href;
 				return link.href;
 			}
 		}
@@ -174,5 +172,4 @@ export class CodigoValidacaoComponent implements OnInit {
 	focus(): void {
 		$('[tabindex=' + 1 + ']').focus();
 	}
-
 }

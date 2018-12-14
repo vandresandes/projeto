@@ -1,9 +1,10 @@
 import { Component, ViewEncapsulation, ViewChild, ElementRef, PipeTransform, Pipe, OnInit } from '@angular/core';
-import { DomSanitizer } from "@angular/platform-browser";
-import * as $ from "jquery";
 import { User } from './models/user';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './service/authentication.service';
+import { DomSanitizer } from "@angular/platform-browser";
+import Viewer from 'viewerjs';
+import * as $ from "jquery";
 
 
 
